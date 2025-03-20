@@ -1,6 +1,6 @@
 import connectMongoDB from '@/lib/mongodb';
 import ShortUrl from '@/models/shortUrl';
-import { generateRandomString } from '@/utils';
+import { generateRandomString, validateUrl } from '@/utils';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
@@ -30,6 +30,10 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   const { url } = await req.json();
   await connectMongoDB();
+
+  if (!validateUrl(url)) {
+    return NextResponse.json({ message: 'URL is invalid' }, { status: 400 });
+  }
 
   const originalUrl =
     url.startsWith('http://') || url.startsWith('https://')

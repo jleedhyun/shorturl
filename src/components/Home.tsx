@@ -2,6 +2,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { validateUrl } from '@/utils';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
@@ -12,14 +13,21 @@ export default function Home() {
   const router = useRouter();
 
   const [url, setUrl] = useState('');
+  const [isInvalid, setIsInvalid] = useState(false);
   const [isPending, setIsPending] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setIsInvalid(false);
     setUrl(e.target.value);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!validateUrl(url)) {
+      setIsInvalid(true);
+      return;
+    }
 
     setIsPending(true);
 
@@ -48,14 +56,23 @@ export default function Home() {
         className="flex w-100 max-w-full flex-col items-center gap-10"
         onSubmit={handleSubmit}
       >
-        <TextField
-          fullWidth
-          label="Type a URL"
-          onChange={handleChange}
-          value={url}
-          variant="outlined"
-        />
+        <div className="flex w-full flex-col gap-1">
+          <TextField
+            error={isInvalid}
+            fullWidth
+            label="Type a URL"
+            onChange={handleChange}
+            value={url}
+            variant="outlined"
+          />
+          {isInvalid && (
+            <Typography color="error" variant="caption">
+              Please enter a valid URL
+            </Typography>
+          )}
+        </div>
         <Button
+          disabled={isInvalid}
           loading={isPending}
           startIcon={<AutoFixNormalRoundedIcon />}
           size="large"
