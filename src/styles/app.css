@@ -1,0 +1,101 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --primary: #4742e5;
+  --primary-container: #615fff;
+  --on-primary-container: #fffeff;
+
+  --secondary: #57579d;
+  --secondary-container: #b2b2ff;
+  --on-secondary-container: #414186;
+
+  --error: #ba1a1a;
+  --error-container: #ffdad6;
+  --on-error-container: #93000a;
+
+  --surface: #fcf8ff;
+  --on-surface: #1b1b24;
+  --on-surface-variant: #464555;
+
+  --outline: #767587;
+  --outline-variant: #c7c4d8;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+}
+
+.dark {
+  --primary: #c1c1ff;
+  --primary-container: #615fff;
+  --on-primary-container: #fffeff;
+
+  --secondary: #c1c1ff;
+  --secondary-container: #3f3f84;
+  --on-secondary-container: #aeaefb;
+
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+
+  --surface: #13131c;
+  --on-surface: #e4e1ee;
+  --on-surface-variant: #c7c4d8;
+
+  --outline: #908fa1;
+  --outline-variant: #464555;
+
+  background: var(--surface);
+  color: var(--on-surface);
+}
+
+body {
+  background: var(--surface);
+  color: var(--on-surface);
+}
+
+/* Change autocomplete styles in Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--on-surface);
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+  color: var(--on-surface) !important;
+}
+
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill:focus {
+  caret-color: var(--on-surface);
+  transition:
+    border cubic-bezier(0.4, 0, 0.2, 1) 150ms,
+    background-color 5000s ease-in-out 0s,
+    color 5000s ease-in-out 0s;
+}
