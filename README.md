@@ -10,14 +10,16 @@ Follow these steps to set up and run the project locally.
 
 ### Prerequisites
 
-Ensure you have the following installed:
+1. Ensure you have the following installed:
 
 - Node.js
 - Yarn
 
+2. This project requires a MongoDB connection URI. You can easily obtain one by creating a database through MongoDB Atlas.
+
 ### Installation
 
-1. Install the dependencies:
+Install the dependencies:
 
 ```bash
 yarn install
